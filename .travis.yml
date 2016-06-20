@@ -17,9 +17,7 @@ script:
   - echo $TRAVIS_PULL_REQUEST
 
 after_success:
-  # - if [ "$TRAVIS_PULL_REQUEST" != "false" -o ("$TRAVIS_BRANCH" != "master" -a "$TRAVIS_BRANCH" != "release") ]; then exit 0; fi
-  - if [ "$TRAVIS_BRANCH" == "release" ]; then
+  - if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "release" ]; then exit 0; fi
   - git push -f -q "https://${GITHUB_TOKEN}@github.com/${GITHUB_RELEASE_REPO}.git" master:gh-pages > /dev/null 2>&1
-  - fi
 
 sudo: false
