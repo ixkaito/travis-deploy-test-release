@@ -20,9 +20,9 @@ script:
   - echo $TRAVIS_BRANCH
   - echo $TRAVIS_PULL_REQUEST
   - pwd
+  - bash ./deploy.sh
 
 after_success:
   - if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "$RELEASE_BRANCH" ]; then exit 0; fi
-  - bash ./deploy.sh
 
 sudo: false
