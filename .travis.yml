@@ -9,12 +9,12 @@ env:
     - GIT_USER: Travis CI
     - GIT_EMAIL: ixkaito@gmail.com
     - GITHUB_RELEASE_REPO: 'ixkaito/travis-deploy-test-release'
-    - RELEASE_BRANCH: release
+    - RELEASE_BRANCH: &release_branch release
 
 branches:
   only:
     - master
-    - release
+    - *release_branch
 
 script:
   - echo $TRAVIS_BRANCH
