@@ -2,11 +2,11 @@
 
 set -e
 
-if [ ! -f CNAME ]; then
-  touch CNAME
-fi
+# if [ ! -f CNAME ]; then
+#   touch CNAME
+# fi
 
-echo $URL > CNAME
+echo $URL >> CNAME
 git config user.name $GIT_USER
 git config user.email $GIT_EMAIL
 git add --all
