@@ -20,7 +20,7 @@ script:
   - if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "$RELEASE_BRANCH" ]; then exit 0; fi
   - if [ ! -f CNAME ]; then touch CNAME; fi
   - echo $URL > CNAME
-  - sed -e "s/^url:.*/url:/" _config.yml
+  - sed -e "s#^url:.*#url: https://example.com#" _config.yml
 
 after_success:
   - git config user.name "${GIT_USER}"
