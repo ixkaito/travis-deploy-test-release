@@ -26,6 +26,7 @@ script:
   - git config user.email $GIT_EMAIL
   - git add --all
   - git commit -m "Deploy from Travis CI"
+  - git log
 
 after_success:
   - if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "$RELEASE_BRANCH" ]; then exit 0; fi
