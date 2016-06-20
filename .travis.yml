@@ -22,7 +22,7 @@ script:
 
 after_success:
   - if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "$RELEASE_BRANCH" ]; then exit 0; fi
-  - if [ ! -f CNAME ]; then touch CNAME; fi
+  - touch CNAME
   - echo $URL > CNAME
   - git config user.name $GIT_USER
   - git config user.email $GIT_EMAIL
