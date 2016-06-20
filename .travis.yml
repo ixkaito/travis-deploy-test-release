@@ -2,22 +2,30 @@ language: node_js
 node_js:
   - '5'
 
-branches:
-  only:
-    - master
-    - release
-
 env:
   global:
     - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+    - URL: dojocon.coderdojo.jp
+    - GIT_USER: Travis CI
+    - GIT_EMAIL: ixkaito@gmail.com
     - GITHUB_RELEASE_REPO: 'ixkaito/travis-deploy-test-release'
+    - RELEASE_BRANCH: release
+
+branches:
+  only:
+    - master
+    - $RELEASE_BRANCH
 
 script:
   - echo $TRAVIS_BRANCH
   - echo $TRAVIS_PULL_REQUEST
 
 after_success:
-  - if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "release" ]; then exit 0; fi
-  - git push -f -q "https://${GITHUB_TOKEN}@github.com/${GITHUB_RELEASE_REPO}.git" release:gh-pages > /dev/null 2>&1
+  - if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "$RELEASE_BRANCH" ]; then exit 0; fi
+  - echo $URL >> CNAME
+  - git config user.name $GIT_USER
+  - git config user.email $GIT_EMAIL
+  - git add --all && git commit -m "Deploy from Travis CI"
+  - git push -f -q "https://${GITHUB_TOKEN}@github.com/${GITHUB_RELEASE_REPO}.git" ${RELEASE_BRANCH}:gh-pages > /dev/null 2>&1
 
 sudo: false
