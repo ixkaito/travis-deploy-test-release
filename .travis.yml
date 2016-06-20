@@ -19,8 +19,9 @@ branches:
 script:
   - echo $TRAVIS_BRANCH
   - echo $TRAVIS_PULL_REQUEST
-  - echo $URL
-  - if [ ! -f "CNAME" ]; then echo "CNAME doesn't exist."; fi
+  - ls -la
+  - echo $URL > CNAME
+  - cat CNAME
 
 after_success:
   - if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "$RELEASE_BRANCH" ]; then exit 0; fi
