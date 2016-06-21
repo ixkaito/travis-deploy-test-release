@@ -5,7 +5,7 @@ node_js:
 env:
   global:
     - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
-    - URI_SCHEME: https://
+    - URI_SCHEME: https
     - CNAME: ixkaito.github.io/travis-deploy-test-release
     - GIT_USER: Kite
     - GIT_EMAIL: ixkaito@gmail.com
@@ -21,7 +21,7 @@ script:
   - if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "$RELEASE_BRANCH" ]; then exit 0; fi
   - if [ ! -f CNAME ]; then touch CNAME; fi
   - echo $CNAME > CNAME
-  - echo "url:\ ${URI_SCHEME}://${CNAME}" >> _config.yml
+  - echo url:\ ${URI_SCHEME}://${CNAME} >> _config.yml
 
 after_success:
   - git config user.name "${GIT_USER}"
